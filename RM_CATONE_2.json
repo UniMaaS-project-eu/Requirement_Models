@@ -1,0 +1,87 @@
+ {
+     "order_id": "#",
+     "goal": "OrderPlan",
+     "mode": "manual",
+     "trigger": {
+         "condition": "OrdersScheduleSubmited"
+     },
+     "order_properties": {
+         "order1_id": "1004",
+         "order1_metadata": {
+            "operation_type": "unloading",
+            "goods_type": "dairy",
+            "temperature_requirements": "2-4°C",
+            "quantity": {
+                    "value": 500,
+                    "unit": "pallets"
+            },  
+            "schedule": "2026-02-04T15:30:00Z-2026-02-04T15:45:00Z",
+            "priority": "high",
+            "storage_duration": {
+                "value": 2,
+                "unit": "days"
+            },
+            "delivery_location": [8.581627, 47.137726],
+            "other_attributes": "more based on order_metadata (KG)..."
+        
+        },
+        "order2_id": "1005",
+         "order2_metadata": {
+            "operation_type": "unloading",
+            "goods_type": "meat",
+            "temperature_requirements": "-1-1°C",
+            "quantity": {
+                    "value": 300,
+                    "unit": "pallets"
+            },  
+            "schedule": "2026-02-04T15:35:00Z-2026-02-04T15:50:00Z",
+            "priority": "low",
+            "storage_duration": {
+                "value": 2,
+                "unit": "days"
+            },
+            "delivery_location": [8.581627, 47.137726],
+            "other_attributes": "more based on order_metadata (KG)..."
+        },
+        "other_orders": "more based on order_metadata (KG)..."
+    
+     },
+     "intent": {
+         "constraints": {
+             "turnover_policy":"FIFO",
+             "logistic_routes": {
+                 "mode": "truck",
+                 "co2emmissions": {
+                     "range": "<=200",
+                     "unit": "g/km"
+                 },
+                 "other_attributes": "more based on logistic_routes metadata (KG)..."
+             },
+             "resources": [{
+                     "name": "dock",
+                     "temperature": "2-4°C",
+                     "other_attributes": "more based on resources metadata (KG)..."
+                 },
+                 {
+                     "name": "truck",
+                     "temperature": "-1-1°C",
+                     "provider":"internal",
+                     "cost": {
+                         "range": "<=2",
+                         "currency": "eur",
+                         "unit": "km"
+                     },
+                     "other_attributes": "more based on resources metadata (KG)..."
+                 }
+             ],
+             "HACCP_regulation": {
+                    "compliance": "true",
+                    "other_attributes": "more based on HACCP_regulation metadata (KG)..."
+             }
+         },
+         "preferences": {
+             "cost": 0.5,
+             "circularity": 0.5
+         }
+     }
+ }

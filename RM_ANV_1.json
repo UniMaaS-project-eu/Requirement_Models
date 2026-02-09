@@ -1,0 +1,43 @@
+ {
+     "order_id": "#",
+     "domain": "additive_manufacturing",
+     "goal": "OrderPlan",
+     "mode": "manual",
+     "trigger": {
+         "condition": "OrderSubmited"
+     },
+     "order_properties": {
+         "dimensions": {
+             "value": [10, 100, 2],
+             "hollow": "True",
+             "unit": "meters"
+         },
+         "material": "concrete",
+         "delivery_datetime": "2026-02-04T15:30:00Z",
+         "location": [8.581627, 47.137726]
+
+     },
+     "intent": {
+         "constraints": {
+             "printing_duration": {
+                 "range": "<=2",
+                 "unit": "days"
+             },
+             "supplier": {
+                 "location": "europe",
+                 "stability": ">=20%",
+                 "other_attributes": "more based on supplier metadata (KG)..."
+             },
+             "cost": {
+                 "range": "<=2000",
+                 "unit": "€"
+             }
+         },
+         "preferences": {
+             "quality": 0.3,
+             "cost": 0.5,
+             "delivery": 0.1,
+             "green": 0.1
+         }
+     }
+ }
