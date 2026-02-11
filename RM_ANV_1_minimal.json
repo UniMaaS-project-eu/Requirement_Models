@@ -1,0 +1,71 @@
+ {
+     "order_id": "#",
+     "domain": "additive_manufacturing",
+     "goal": "OrderPlan",
+     "submission_date": "2026-02-01T15:30:00Z",
+     "mode": "manual",
+     "trigger": {
+         "condition": "OrderSubmited"
+     },
+     "order_properties": {
+         "dimensions": {
+             "value": [10, 100, 2],
+             "hollow": "True",
+             "unit": "meters"
+         },
+         "material": "concrete",
+         "delivery_datetime": {
+             "after": {
+                 "type": "relevant",
+                 "date": {
+                     "value": "0",
+                     "unit": "days"
+                 }
+             },
+             "before": {
+                 "type": "absolute",
+                 "date": { "value": "2026-03-05T15:30:00Z" }
+             }
+         },
+         "location": {
+             "street_name": "",
+             "street_number": "",
+             "zipcode": "",
+             "region": "",
+             "country": ""
+         }
+
+     },
+     "intent": {
+         "object_type": "",
+         "constraints": {
+             "printing_duration": {
+                 "range": ">=0",
+                 "unit": "days"
+             },
+             "supplier": {
+                 "location": "",
+                 "material_cost": ">=0€",
+                 "delivery_reliability": ">=0%",
+                 "lead_time": ">=0d"
+             },
+             "material": {
+                 "printability": ">=0%",
+                 "strength": ">=0MPa",
+                 "certification": ">=0",
+                 "sustainability": ">=0",
+                 "recyclable": false
+             },
+             "cost": {
+                 "range": ">=0",
+                 "unit": "€"
+             }
+         },
+         "preferences": {
+             "quality": 0.25,
+             "cost": 0.25,
+             "delivery": 0.25,
+             "green": 0.25
+         }
+     }
+ }
