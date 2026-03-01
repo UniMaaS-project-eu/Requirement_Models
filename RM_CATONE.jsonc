@@ -20,10 +20,11 @@
      2) Do we care about the storage duration of the goods in the warehouse? 
      3) How is the cost for the customer calculated? Is it based on the distance, the quantity, the type of good, or a combination of these factors?
      4) We will consider an order prioritization based on the customer. 
-     5) Do we care about the turnover policy? If so, does it express Catone's preference for a specific order?
-     6) Do we care about CO2 emissions of the logistic routes? If so, how do we want to express this constraint? Do we want to set a maximum threshold for CO2 emissions, or do we want to minimize CO2 emissions as much as possible?
-     7) Does catone have a preference between internal or external truck providers?
-     8) Do we care about the compliance with HACCP regulations and does Catone have relative preference for each order? Binary or compliance levels?
+     5) We will consider that the temperature of the docks and cells is static and known.
+     6) Do we care about the turnover policy? If so, does it express Catone's preference for a specific order?
+     7) Do we care about CO2 emissions of the logistic routes? If so, how do we want to express this constraint? Do we want to set a maximum threshold for CO2 emissions, or do we want to minimize CO2 emissions as much as possible?
+     8) Does Catone have a preference between internal or external truck providers?
+     9) Do we care about the compliance with HACCP regulations and does Catone have relative preference for each order? Binary or compliance levels?
      */
     "order_properties": { //these are specified and input by the user through the chatbot and following the guidelines
         "customer_id": "C123",
@@ -82,4 +83,5 @@
              "circularity": 0.5
          }
     }
+
  }
