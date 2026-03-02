@@ -1,0 +1,48 @@
+ {
+     "order_id": "#",
+     "domain": "aircraft_maintenance",
+     "goal": "MRO_selection",
+     "submission_date": "2026-02-01T15:30:00Z",
+     "mode": "manual",
+     "trigger": {
+         "condition": "OrderSubmited"
+     },
+     "order_properties": {
+        /*
+        ASSUMPTIONS
+        We need as input: the aircraft id, the current clocks of the maintenance tasks, and the task importance.
+        1. We assume that the current task clocks will be extracted from an ERP type data source.
+        2. We consider that maintenance tasks importance is iput intent from Aegean.
+
+        QUESTIONS
+        1. How do we express the cost? What are the cost parameters and do we specify a maximum budget or a deviation form the minimum baseline cost?
+           Generally, we want to minimize the cost.
+        2. Estimation of the project duration, depending on the formed projects and the MRO selection.
+        */
+        "aircraft_id": "A320-200"
+     },
+     "intent": {
+         "constraints": {
+             "blackout_periods": "2026-02-10 to 2026-02-20", //will this be chatbot input or static knowledge?
+             "maximum_projects": {
+                 "value": "2",
+                 "period": "year"
+             },
+             "maintenance_task_importance": "[task1: high, task2: medium, task3: low]", //will we have such static info or will it be chatbot input?
+             "base_cost_deviation": {//cost of the maintenance for the specified aircraft and time period
+                 "range": ">=0",
+                 "unit": "%"
+             },
+             "supplier": {//MRO providers, spare parts suppliers, etc.
+                 "location": "Italy",
+                 "capacity": ">=0",
+                 "labour_rate": ">=0€/h"
+                 //"other_attributes": "more based on MRO supplier metadata (KG)..."
+             }
+         },
+         "preferences": {// VALIDATE: what are the criteria for the decision-making?
+             "downtime": 0.5,
+             "cost": 0.5
+         }
+     }
+ }
