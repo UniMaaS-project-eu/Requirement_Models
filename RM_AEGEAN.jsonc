@@ -1,7 +1,7 @@
  {
      "order_id": "#",
      "domain": "aircraft_maintenance",
-     "goal": "MRO_selection",
+     "goal": "Aircraft-level_planning_and_MRO_selection",
      "submission_date": "2026-02-01T15:30:00Z",
      "mode": "manual",
      "trigger": {
@@ -45,4 +45,5 @@
              "cost": 0.5
          }
      }
+
  }
