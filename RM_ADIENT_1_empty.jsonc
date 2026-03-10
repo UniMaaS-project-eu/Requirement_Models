@@ -1,0 +1,85 @@
+ {
+     "order_id": "#",
+     "domain": "automotive_seat_manufacturing",
+     "goal": "OrderPlan",
+     "submission_date": "2026-02-01T15:30:00Z",
+     "mode": "manual",
+     "trigger": {
+         "condition": "OrderSubmited"
+     },
+     /*
+     Questions to Adient:
+     1. Are there other order properties submitted by the customer?
+     2. What intermediary products does each plant/site produce (foam, fabric, structure, etc.)?
+     3. What are the attributes of the resources, suppliers, logistic routes, sites that differentiate them 
+        (e.g., quality, cost, sustainability, location, capacity, reliability, CO2 emissions, cost)? 
+     4. We consider that customers request for rate of delivery (e.g., 500 containers per week), not for a total quantity (e.g., 500 containers). 
+        Is this correct? Otherwise, do they request a desired delivery time window (e.g., 500 containers to be delivered within 1 week)?
+     5. How is the total cost for the customer calculated? 
+     */
+     "order_properties": {//these are specified and input by the user through the chatbot and following the guidelines
+         "product": "",
+         "quantity": {
+             "value": 0,
+             "unit": "containers",
+             "period": {
+                 "value": 1,
+                 "unit": "week"
+             }
+         },
+         "location": {
+             "street_name": "",
+             "street_number": "",
+             "zipcode": "",
+             "region": "",
+             "country": ""
+         }
+
+     },
+     "intent": {//VALIDATE WITH ADIENT
+         "constraints": {
+            //KG entities and attributes
+             "supplier": {
+                 "location": "",
+                 "material_cost": ">=0€"
+                 //"other_attributes": "more based on supplier metadata (KG)..."
+             },
+             "site": {
+                 "location": "",
+                 "production_rate": ">=0 containers/week"
+                 //"other_attributes": "more based on supplier metadata (KG)..."
+             },
+             "logistic_routes": {
+                 "mode": "",
+                 "co2emmissions": {
+                     "range": ">=0",
+                     "unit": "g/km"
+                 }
+                 //"other_attributes": "more based on logistic_routes metadata (KG)..."
+             },
+             "resources": [{
+                     "name": "",
+                     "quality": ""
+                     //"other_attributes": "more based on resources metadata (KG)..."
+                 },
+                 {
+                     "name": "",
+                     "cost": {
+                         "range": ">=0",
+                         "currency": "eur",
+                         "unit": "kg"
+                     }
+                     //"other_attributes": "more based on resources metadata (KG)..."
+                 }
+             ],
+             "cost": { 
+                 "range": ">=0",
+                 "currency": "eur"
+             }
+         },
+         "preferences": { // VALIDATE: do we have criteria-based decision-making?
+             "cost": 0.5,
+             "quality": 0.5
+         }
+     }
+ }

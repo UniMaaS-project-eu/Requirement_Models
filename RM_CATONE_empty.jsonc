@@ -1,0 +1,100 @@
+ {
+    "order_id": "1004",
+    "domain": "WarehouseManagementAndLogistics",
+    "goal": "OrderPlan",
+    "submission_date": "2026-02-01T15:30:00Z",
+    "mode": "manual",
+    "trigger": {
+         "condition": "OrderSubmited"
+     },
+     /*
+     User input to the chatbot:
+     1) Type of good
+     2) Quantity
+     3) Schedule
+     4) Type of operation (loading/unloading)
+     */
+     /*
+     Questions to Catone and VALIDATION:
+     1) Mapping between types of goods and their temperature requirements
+     2) Do we care about the storage duration of the goods in the warehouse? 
+     3) How is the cost for the customer calculated? Is it based on the distance, the quantity, the type of good, or a combination of these factors?
+     4) We will consider an order prioritization based on the customer. 
+     5) We will consider that the temperature of the docks and cells is static and known.
+     6) Do we care about the turnover policy? If so, does it express Catone's preference for a specific order?
+     7) Do we care about CO2 emissions of the logistic routes? If so, how do we want to express this constraint? Do we want to set a maximum threshold for CO2 emissions, or do we want to minimize CO2 emissions as much as possible?
+     8) Does Catone have a preference between internal or external truck providers?
+     9) Do we care about the compliance with HACCP regulations and does Catone have relative preference for each order? Binary or compliance levels?
+     */
+    "order_properties": { //these are specified and input by the user through the chatbot and following the guidelines
+        "customer_id": "",
+        "operation_type": "loading/unloading",
+        "goods_type": "",
+        "temperature_requirements": "", //chatbot extracted: the intent transaltion maps the types of goods to their temperature requirements
+        "quantity": {
+                "value": 0,
+                "unit": "pallets"
+        },
+        "scheduled_datetime": {
+             "after": {
+                 "type": "relevant",
+                 "date": {
+                     "value": "0",
+                     "unit": "days"
+                 }
+             },
+             "before": {
+                 "type": "absolute",
+                 "date": { "value": "2026-03-05T15:30:00Z" }
+             }
+         },
+        "storage_duration": { //VALIDATE
+            "value": 2,
+            "unit": "days"
+        },
+        "delivery_location": [8.581627, 47.137726]
+        //"other_attributes": "more based on order_metadata (KG)..."        
+    },
+    "intent": {
+         "constraints": {
+            //order priority could be levereged by the model
+             "priority": "", //VALIDATE: we will consider an order prioritization based on the customer
+             "turnover_policy":"", //VALIDATE
+             "logistic_routes": {
+                 "mode": "",
+                 "co2emmissions": { //VALIDATE
+                     "range": ">=0",
+                     "unit": "g/km"
+                 }
+                 //"other_attributes": "more based on logistic_routes metadata (KG)..."
+             },
+             "resources": [{ //KG entities and attributes related to resources
+                     "name": "dock",
+                     "temperature": ""
+                     //"other_attributes": "more based on resources metadata (KG)..."
+                 },
+                 {
+                     "name": "truck",
+                     "temperature": "",
+                     "provider":"", //VALIDATE: does catone have a preference between internal or external truck providers?
+                     "cost": {
+                         "range": ">=0",
+                         "currency": "eur",
+                         "unit": "km"
+                     }
+                     //"other_attributes": "more based on resources metadata (KG)..."
+                 }
+             ],
+             "HACCP_regulation": { //VALIDATE
+                    "compliance": ""
+                    //"other_attributes": "more based on HACCP_regulation metadata (KG)..."
+             }
+         },
+         "preferences": { // VALIDATE: do we have criteria-based decision-making?
+             "cost": 0.5,
+             "circularity": 0.5
+         }
+    }
+
+ }
+
