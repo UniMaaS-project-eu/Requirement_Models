@@ -10,14 +10,12 @@
      "order_properties": {
         /*
         ASSUMPTIONS
-        We need as input: the aircraft id, the current clocks of the maintenance tasks, and the task importance.
-        1. We assume that the current task clocks will be extracted from an ERP type data source.
-        2. We consider that maintenance tasks importance is iput intent from Aegean.
+        We assume that the current task clocks, the task frequencies (max utilization intervals) and the task importance
+        will be extracted from an ERP-type data source. Is this a safe assumption? Should any of these elements instead be part of the chatbot input?
 
         QUESTIONS
         1. How do we express the cost? What are the cost parameters and do we specify a maximum budget or a deviation form the minimum baseline cost?
            Generally, we want to minimize the cost.
-        2. Estimation of the project duration, depending on the formed projects and the MRO selection.
         */
         "aircraft_id": "A320-200"
      },
@@ -47,3 +45,4 @@
      }
 
  }
+
