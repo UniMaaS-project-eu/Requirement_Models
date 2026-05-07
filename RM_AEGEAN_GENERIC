@@ -1,0 +1,97 @@
+{
+    "order_id":        "<string>",
+    "domain":          "<enum: aircraft_maintenance>",
+    "goal":            "<enum: aircraft_level_planning>", // Goal is aircraft-level planning only, with no MRO selection.
+    "submission_date": "<ISO-8601 datetime>",
+    "mode":            "<enum: manual | automatic>",
+    "trigger": {
+        "condition": "<enum: OrderSubmitted>"
+    },
+
+    "order_properties": {
+        "operator_code": "<string | null>",
+        "aircraft_id":   "<string | null>",
+        "plan_type":     "<enum: base_maintenance | null>"
+    },
+
+    "intent": {
+        "constraints": {
+            "planning_horizon": {
+                "start_date": "<ISO-8601 date | null>",
+                "end_date":   "<ISO-8601 date | null>"
+            },
+
+            "blackout_periods": [      // We can have multiple blackout periods, so I changed this field to a list.
+                {
+                    "recurrence":      "<enum: yearly | weekly | none>",     // A blackout period can happen annually, weekly, or only during the first year.                           
+                    "start":           "<MM-DD if yearly, YYYY-MM-DD if none, day-of-week if weekly>",      
+                    "end":             "<MM-DD if yearly, YYYY-MM-DD if none, day-of-week if weekly>",
+                    "constraint_type": "<enum: hard | soft>"     // The partner wants to consider blackout periods also as soft constraints, for example: "It is better to avoid maintenance during this period."
+                }
+            ],
+
+            "maximum_projects": [       // This is a list because the maximum number of projects may change from one season to another, for example: up to 2 projects in the first season, then up to 3 projects in the second season.
+                {
+                    "value": "<integer | null>",
+                    "period": {
+                        "type":       "<enum: season>",
+                        "definition": {
+                            "start": "<MM-DD | null>",
+                            "end":   "<MM-DD | null>"
+                        },
+                        "recurrence": "<enum: yearly | none | null>"
+                    }
+                }
+            ],
+
+            "task_scheduling_rules": {      
+                "max_days_before_due_date": {   // In the intent provided by AEGEAN, they mentioned this information, so I added this field.
+                    "value": "<integer | null>",
+                    "unit":  "<enum: day | flight_hour | cycle | null>"
+                },
+                "earliest_start_date": {    // This information may also be mentioned.
+                    "date": "<ISO-8601 date | null>"
+                },
+                "latest_finish_date": {
+                    "date": "<ISO-8601 date | null>"
+                }
+            },
+
+            "late_scheduled_tasks": "<list | null>",    // This replaces "maintenance_task_importance", because for AEGEAN, priority means that some tasks are expensive and should therefore be scheduled as close as possible to their due date.
+
+            "base_cost_deviation": {                   // This field is not clear for the partner, and they want us to define "base_cost_deviation". We can delete it if it is possible and not mandatory.
+                "operator": "<enum: >= | > | <= | < | == | null>",
+                "value":    "<number | null>",
+                "unit":     "<enum: % | EUR | null>"
+            },
+
+            "supplier": {         // MRO selection is not considered in this intent, so this field will always be mapped from the KG. The user cannot ask for a specific MRO.
+                "location": "<string | null>",
+                "capacity": {
+                    "operator": "<enum: >= | > | <= | < | == | null>",
+                    "value":    "<number | null>",
+                    "unit":     "<null>"
+                },
+                "labour_rate": {
+                    "operator": "<enum: >= | > | <= | < | == | null>",
+                    "value":    "<number | null>",
+                    "unit":     "<enum: EUR_per_hour | null>"
+                },
+                "mro_blackout_periods": [   // The partner mentioned that the MRO may also have blackout periods. I am not sure whether this information will be available or not, but we can keep it null.
+                    {
+                        "recurrence": "<enum: yearly | weekly | none>",
+                        "start":      "<MM-DD if yearly, YYYY-MM-DD if none, day-of-week if weekly>",
+                        "end":        "<MM-DD if yearly, YYYY-MM-DD if none, day-of-week if weekly>"
+                    }
+                ]
+            }
+        },
+
+        "preferences": {
+            "weights": {
+                "downtime": "<float [0,1]>",
+                "cost":     "<float [0,1]>" 
+            }
+        }
+    }
+}
