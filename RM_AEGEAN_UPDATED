@@ -1,0 +1,86 @@
+{
+  "aegean_intent": "Create a 3-year base maintenance plan for AAA/A320. The season will run from 1 September to 31 August each year. Blackout periods apply from 20 June to 31 August annually. Up to two projects may be scheduled per season. Calendar-driven checks should be planned as close as possible to their due dates, and no task may be scheduled more than 250 days before its due date. The plan should aim to minimize aircraft downtime.",
+  "requirement_model": {
+    "order_id": "#",
+    "domain": "aircraft_maintenance",
+    "goal": "aircraft_level_planning",
+    "submission_date": "2026-02-01T15:30:00Z",
+    "mode": "manual",
+    "trigger": {
+      "condition": "OrderSubmitted"
+    },
+    "order_properties": {
+      "operator_code": "AAA",
+      "aircraft_id": "A320"
+    },
+    "intent": {
+      "constraints": {
+        "planning_horizon": {
+          "start_date": "2026-09-01",
+          "end_date": "2029-08-31"
+        },
+        "blackout_periods": [
+          {
+            "recurrence": "yearly",
+            "start": "06-20",
+            "end": "08-31",
+            "constraint_type": "hard"
+          }
+        ],
+        "maximum_projects": [
+          {
+            "value": 2,
+            "period": {
+              "type": "season",
+              "definition": {
+                "start": "09-01",
+                "end": "08-31"
+              },
+              "recurrence": "yearly"
+            }
+          }
+        ],
+        "task_scheduling_rules": {
+          "max_days_before_due_date": {
+            "value": 250,
+            "unit": "day"
+          },
+          "earliest_start_date": {
+            "date": "2026-09-01"
+          },
+          "latest_finish_date": {
+            "date": "2029-08-31"
+          }
+        },
+        "late_scheduled_tasks": [
+          "calendar_driven_checks"
+        ],
+        "base_cost_deviation": {
+          "operator": null,
+          "value": null,
+          "unit": null
+        },
+        "supplier": {
+          "location": null,
+          "capacity": {
+            "operator": null,
+            "value": null,
+            "unit": null
+          },
+          "labour_rate": {
+            "operator": null,
+            "value": null,
+            "unit": null
+          },
+          "mro_blackout_periods": []
+        }
+      },
+      "preferences": {
+        "weights": {
+          "downtime": 1.0,
+          "cost": 0.0
+        }
+      }
+    }
+  }
+}
