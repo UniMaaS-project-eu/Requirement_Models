@@ -1,0 +1,116 @@
+{
+  "order_id": "<string>",
+  "domain": "<enum: warehouse_management_and_logistics>",
+  "goal": "<enum: order_plan>",
+  "submission_date": "<ISO-8601 datetime>",
+  "mode": "<enum: manual | automatic>",
+  "trigger": {
+    "condition": "<enum: OrderSubmitted>"
+  },
+  "order_properties": {
+    "customer_id": "<string | null>",
+    "operation_type": "<enum: loading | unloading | null>",
+    "goods_type": "<string | null>",  
+    "temperature": { 
+      // Will be mapped from the KG
+      "target": "<float | null>",
+      "unit": "<enum: celsius | fahrenheit | null>",
+      "tolerance": {
+        "plus": "<float | null>",
+        "minus": "<float | null>"
+      }
+    },
+    "workload": { 
+      // Covers cases where clients have recurrent operations
+      "operations": "<integer | null>",
+      "unit": "<enum: pallets | null>",
+      "total": "<float | null>",
+      "per_operation": "<float | null>",
+      "rate": {
+        "value": "<float | null>",
+        "per": "<enum: day | week | month | null>"
+      }
+    },
+    "scheduled_datetime": {
+      "after": {
+        "type": "<enum: absolute | relative | null>",
+        "date": "<ISO-8601 datetime | null>"
+      },
+      "before": {
+        "type": "<enum: absolute | relative | null>",
+        "date": "<ISO-8601 datetime | null>"
+      }
+    },
+    "storage_duration": { 
+      // Although the partner said this is not required, they still specify it in the intents they provided, so I kept it
+      "value": "<integer | null>",
+      "unit": "<enum: hour | day | week | month | null>"
+    },
+    "locations": [
+      {
+        "street_name": "<string | null>",
+        "street_number": "<string | null>",
+        "zipcode": "<string | null>",
+        "region": "<string | null>",
+        "country": "<string | null>"
+      }
+    ]
+  },
+  "intent": {
+    "constraints": {
+      "priority": "<enum: low | medium | high | null>",
+      "pallet_exchange": "<bool | null>",
+      "turnover_policy": "<enum: FIFO | LIFO | FEFO | null>",
+      "logistic_routes": {
+        "mode": "<enum: truck | null>",
+        "pattern": "<enum: one_way | loop | null>", 
+        "co2_emissions": {
+          "operator": "<enum: >= | > | <= | < | == | null>",
+          "value": "<float | null>",
+          "unit": "<enum: g_per_km | null>"
+        }
+      },
+      "resources": [
+        {
+          "name": "<enum: dock | truck | null>",
+          "temperature": {
+            "target": "<float | null>",
+            "unit": "<enum: celsius | fahrenheit | null>",
+            "tolerance": {
+              "plus": "<float | null>",
+              "minus": "<float | null>"
+            },
+            "precool": {
+              "required": "<bool | null>",
+              "target": "<float | null>",
+              "unit": "<enum: celsius | fahrenheit | null>",
+              "tolerance": {
+                "plus": "<float | null>",
+                "minus": "<float | null>"
+              }
+            }
+          },
+          "provider": {
+            "type": "<enum: internal | external | null>",
+            "certifications": [
+              "<enum: GDP | ISO9001 | null>"
+            ]
+          },
+          "cost": {
+            "operator": "<enum: >= | > | <= | < | == | null>",
+            "value": "<float | null>",
+            "currency": "<enum: EUR | null>",
+            "unit": "<enum: km>"
+          }
+        }
+      ],
+      "regulatory_compliance": [
+        {
+          "standard": "<enum: HACCP | null>",
+          "required": "<bool | null>"
+        }
+      ]
+    }
+    // Based on the intents provided by the partner, there is no need to include preferences
+  }
+}
