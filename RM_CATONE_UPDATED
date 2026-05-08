@@ -1,0 +1,113 @@
+{
+  "catone_intent": "Load 100 pallets/day of fresh milk (total 500 pallets for Week 16) for customer CUST-001 at Via Tiburtina 450, 00159, Lazio, Italy. Transport is performed with the same truck in a continuous loop: departure from warehouse, delivery to cold storage for freezing. Priority is high. Dock temperature must be -24°C with a tolerance of ±2°C. HACCP compliance is required.",
+  "requirement_model": {
+    "order_id": "#",
+    "domain": "warehouse_management_and_logistics",
+    "goal": "order_plan",
+    "submission_date": "2026-02-01T15:30:00Z",
+    "mode": "manual",
+    "trigger": {
+      "condition": "OrderSubmitted"
+    },
+    "order_properties": {
+      "customer_id": "CUST-001",
+      "operation_type": "loading",
+      "goods_type": "milk",
+      "temperature": {
+        "target": null,
+        "unit": null,
+        "tolerance": {
+          "plus": null,
+          "minus": null
+        }
+      },
+      "workload": {
+        "operations": null,
+        "unit": "pallets",
+        "total": 500,
+        "per_operation": null,
+        "rate": {
+          "value": 100,
+          "per": "day"
+        }
+      },
+      "scheduled_datetime": {
+        "after": {
+          "type": "absolute",
+          "date": "2026-04-13T00:00:00+02:00"
+        },
+        "before": {
+          "type": "absolute",
+          "date": "2026-04-19T23:59:59+02:00"
+        }
+      },
+      "storage_duration": {
+        "value": null,
+        "unit": null
+      },
+      "locations": [
+        {
+          "street_name": "Via Tiburtina",
+          "street_number": "450",
+          "zipcode": "00159",
+          "region": "Lazio",
+          "country": "Italy"
+        }
+      ]
+    },
+    "intent": {
+      "constraints": {
+        "priority": "high",
+        "pallet_exchange": null,
+        "turnover_policy": null,
+        "logistic_routes": {
+          "mode": "truck",
+          "pattern": "loop",
+          "co2_emissions": {
+            "operator": null,
+            "value": null,
+            "unit": null
+          }
+        },
+        "resources": [
+          {
+            "name": "dock",
+            "temperature": {
+              "target": -24,
+              "unit": "celsius",
+              "tolerance": {
+                "plus": 2,
+                "minus": 2
+              },
+              "precool": {
+                "required": null,
+                "target": null,
+                "unit": null,
+                "tolerance": {
+                  "plus": null,
+                  "minus": null
+                }
+              }
+            },
+            "provider": {
+              "type": null,
+              "certifications": []
+            },
+            "cost": {
+              "operator": null,
+              "value": null,
+              "currency": null,
+              "unit": null
+            }
+          }
+        ],
+        "regulatory_compliance": [
+          {
+            "standard": "HACCP",
+            "required": true
+          }
+        ]
+      }
+    }
+  }
+}
