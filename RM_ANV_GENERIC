@@ -1,0 +1,136 @@
+{
+  "order_id": "<string>",
+  "domain": "<enum: additive_manufacturing>",
+  "goal": "<enum: OrderPlan>",
+  "mode": "<enum: manual | automatic>",
+  "trigger": {
+    "condition": "<enum: OrderSubmitted>"
+  },
+  "order_properties": {
+    "production": {
+      "mode": "<enum: on_site | off_site | hybrid | null>",
+      "impact_resistance": "<boolean | null>",
+      "start_date": {
+        "after": {
+          "type": "<enum: absolute | relative | null>",
+          "date": "<ISO-8601 datetime | null>",
+          "duration": {
+            "value": "<float | null>",
+            "unit": "<enum: hours | days | weeks | months | years | null>"
+          },
+          "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+        },
+        "before": {
+          "type": "<enum: absolute | relative | null>",
+          "date": "<ISO-8601 datetime | null>",
+          "duration": {
+            "value": "<float | null>",
+            "unit": "<enum: hours | days | weeks | months | years | null>"
+          },
+          "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+        }
+      },
+      "end_date": {
+        "after": {
+          "type": "<enum: absolute | relative | null>",
+          "date": "<ISO-8601 datetime | null>",
+          "duration": {
+            "value": "<float | null>",
+            "unit": "<enum: hours | days | weeks | months | years | null>"
+          },
+          "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+        },
+        "before": {
+          "type": "<enum: absolute | relative | null>",
+          "date": "<ISO-8601 datetime | null>",
+          "duration": {
+            "value": "<float | null>",
+            "unit": "<enum: hours | days | weeks | months | years | null>"
+          },
+          "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+        }
+      }
+    },
+    "items": [
+      {
+        "item_id": "<string>",
+        "object_type": "<string | null>",
+        "quantity": "<integer>",
+        "wall_thickness": {
+          "value": "<float | null>",
+          "unit": "<enum: meter | millimeter | centimeter | null>"
+        },
+        "dimensions": [
+          {
+            "name": "<enum: length | width | height | radius | diameter | thickness>",
+            "value": "<float>",
+            "unit": "<enum: meter | millimeter | centimeter>"
+          }
+        ]
+      }
+    ],
+    "delivery_datetime": {
+      "after": {
+        "type": "<enum: absolute | relative | null>",
+        "date": "<ISO-8601 datetime | null>",
+        "duration": {
+          "value": "<float | null>",
+          "unit": "<enum: hours | days | weeks | months | years | null>"
+        },
+        "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+      },
+      "before": {
+        "type": "<enum: absolute | relative | null>",
+        "date": "<ISO-8601 datetime | null>",
+        "duration": {
+          "value": "<float | null>",
+          "unit": "<enum: hours | days | weeks | months | years | null>"
+        },
+        "reference_event": "<enum: order_submission | contract_signature | production_start | null>"
+      }
+    },
+    "material": {
+      "family": "<enum: concrete | metal | polymer | composite | other | null>",
+      "type": "<enum: standard | uhpc | reinforced_concrete | null>"
+    },
+    "location": {
+      "street_name": "<string | null>",
+      "street_number": "<string | null>",
+      "zipcode": "<string | null>",
+      "region": "<string | null>",
+      "country": "<string | null>"
+    }
+  },
+  "intent": {
+    "constraints": {
+      "printing_duration": {
+        "operator": "<enum: <= | >= | = | between | null>",
+        "value": "<float | null>",
+        "min_value": "<float | null>",
+        "max_value": "<float | null>",
+        "unit": "<enum: hours | days | weeks | months | years | null>"
+      },
+      "supplier": {
+        "location": "<string | null>",
+        "stability": {
+          "operator": "<enum: <= | >= | = | between | null>",
+          "value": "<float | null>",
+          "unit": "<enum: percent | null>"
+        }
+      },
+      "cost": {
+        "operator": "<enum: <= | >= | = | between | null>",
+        "value": "<float | null>",
+        "min_value": "<float | null>",
+        "max_value": "<float | null>",
+        "unit": "<enum: EUR | null>"
+      }
+    },
+    "preferences": {
+      "quality": "<float | null>",
+      "cost": "<float | null>",
+      "delivery": "<float | null>",
+      "green": "<float | null>"
+    }
+  }
+}
