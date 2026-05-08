@@ -34,11 +34,19 @@
     "scheduled_datetime": {
       "after": {
         "type": "<enum: absolute | relative | null>",
-        "date": "<ISO-8601 datetime | null>"
+        "date": "<ISO-8601 datetime | null>",
+        "duration": {
+          "value": "<float | null>",
+          "unit": "<enum: hour | day | week | month | null>"
+        }
       },
       "before": {
         "type": "<enum: absolute | relative | null>",
-        "date": "<ISO-8601 datetime | null>"
+        "date": "<ISO-8601 datetime | null>",
+        "duration": {
+          "value": "<float | null>",
+          "unit": "<enum: hour | day | week | month | null>"
+        }
       }
     },
     "storage_duration": { 
