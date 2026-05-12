@@ -1,0 +1,175 @@
+{
+  "anv_intent": "I want to print a set of benches with the following dimensions: 4 pieces 1x2x0.8m and 2 pieces 2x3x2m. I'm looking for a concrete finish and impact resistance. Installation address: Przy Bażantarni 3, 02-793 Warsaw, Poland. Construction will take place on-site in October 2026. Completion time: 3 months from signing the contract.",
+  "requirement_model": {
+    "order_id": "#",
+    "domain": "additive_manufacturing",
+    "goal": "OrderPlan",
+    "mode": "manual",
+    "trigger": {
+      "condition": "OrderSubmitted"
+    },
+    "order_properties": {
+      "production": {
+        "mode": "on_site",
+        "impact_resistance": true,
+        "start_date": {
+          "after": {
+            "type": "absolute",
+            "date": "2026-10-01T00:00:00Z",
+            "duration": {
+              "value": null,
+              "unit": null
+            },
+            "reference_event": null
+          },
+          "before": {
+            "type": "absolute",
+            "date": "2026-10-31T23:59:59Z",
+            "duration": {
+              "value": null,
+              "unit": null
+            },
+            "reference_event": null
+          }
+        },
+        "end_date": {
+          "after": {
+            "type": null,
+            "date": null,
+            "duration": {
+              "value": null,
+              "unit": null
+            },
+            "reference_event": null
+          },
+          "before": {
+            "type": "relative",
+            "date": null,
+            "duration": {
+              "value": 3,
+              "unit": "months"
+            },
+            "reference_event": "contract_signature"
+          }
+        }
+      },
+      "items": [
+        {
+          "item_id": "ITEM-001",
+          "object_type": "bench",
+          "quantity": 4,
+          "wall_thickness": {
+            "value": null,
+            "unit": null
+          },
+          "dimensions": [
+            {
+              "name": "length",
+              "value": 1,
+              "unit": "meter"
+            },
+            {
+              "name": "width",
+              "value": 2,
+              "unit": "meter"
+            },
+            {
+              "name": "height",
+              "value": 0.8,
+              "unit": "meter"
+            }
+          ]
+        },
+        {
+          "item_id": "ITEM-002",
+          "object_type": "bench",
+          "quantity": 2,
+          "wall_thickness": {
+            "value": null,
+            "unit": null
+          },
+          "dimensions": [
+            {
+              "name": "length",
+              "value": 2,
+              "unit": "meter"
+            },
+            {
+              "name": "width",
+              "value": 3,
+              "unit": "meter"
+            },
+            {
+              "name": "height",
+              "value": 2,
+              "unit": "meter"
+            }
+          ]
+        }
+      ],
+      "delivery_datetime": {
+        "after": {
+          "type": null,
+          "date": null,
+          "duration": {
+            "value": null,
+            "unit": null
+          },
+          "reference_event": null
+        },
+        "before": {
+          "type": null,
+          "date": null,
+          "duration": {
+            "value": null,
+            "unit": null
+          },
+          "reference_event": null
+        }
+      },
+      "material": {
+        "family": "concrete",
+        "type": null
+      },
+      "location": {
+        "street_name": "Przy Bażantarni",
+        "street_number": "3",
+        "zipcode": "02-793",
+        "region": "Warsaw",
+        "country": "Poland"
+      }
+    },
+    "intent": {
+      "constraints": {
+        "printing_duration": {
+          "operator": null,
+          "value": null,
+          "min_value": null,
+          "max_value": null,
+          "unit": null
+        },
+        "supplier": {
+          "location": null,
+          "stability": {
+            "operator": null,
+            "value": null,
+            "unit": null
+          }
+        },
+        "cost": {
+          "operator": null,
+          "value": null,
+          "min_value": null,
+          "max_value": null,
+          "unit": null
+        }
+      },
+      "preferences": {
+        "quality": null,
+        "cost": null,
+        "delivery": null,
+        "green": null
+      }
+    }
+  }
+}
