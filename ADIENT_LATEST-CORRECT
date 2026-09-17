@@ -1,0 +1,40 @@
+{
+  "orderId": "<string>",
+  "domain": "<enum: automotive_seat_manufacturing>",
+  "goal": "<enum: OrderPlan>",
+  "mode": "<enum: manual | automatic>",
+  "trigger": {
+    "condition": "<enum: OrderSubmitted>"
+  },
+  "orderProperties": {
+    "product": "<enum: Metal Mechanism | Metal Stamping | Metal Structure | Final Seat | null >"
+  },
+  "intent": {
+    "constraints": {
+      "site": [
+        {
+          "id": "<string | null>",
+          "country": "<string | null>",
+          "entity": "<string | null>",
+          "productionRate": "<string | null>",
+          "siteType": "<string | null>",
+          "tier": "<integer | null>", 
+          "performs": "<string | null>"
+        }
+      ],
+      "logisticRoute": {
+        "routeId": "<string | null>",
+        "emptyTruckCap": "<integer | null>",
+        "fullTruckCap": "<integer | null>",
+        "transportDistance": "<float | null>",
+        "freightMode": "<string | null>",
+        "leadTimeDays": "<float | null>",
+        "hasEndingPoint": "<Site | null>",
+        "hasStartingPoint": "<Site | null>",
+        "qDaysBetweenReceivingsForFTLs": "<float | null>",
+        "approxTransportCostFullTruck": "<integer | null>",
+        "qDaysBetweenEmptyReturnsFTLs": "<float | null>"
+      }
+    }
+  }
+}
